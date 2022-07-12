@@ -22,6 +22,9 @@ class CheckBoxPage extends BasePage {
     static get checkExcel(){
         return cy.get(':nth-child(3) > ol > :nth-child(2) > .rct-text > label > .rct-checkbox > .rct-icon');
     }
+    static get checkOffice(){
+        return cy.get('[id = "tree-node-office"]');
+    }
     static get resultNotes(){
         return cy.get('#result > :nth-child(2)');
     }

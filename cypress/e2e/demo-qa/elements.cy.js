@@ -32,7 +32,7 @@ context("Elements Page", () => {
     });
     //cy.get(':nth-child(1) > .element-list > .menu-list > #item-1')
     // Create checkbox scenario 1:
-    it.only("scenario 1", () => {
+    it("scenario 1", () => {
       // Click the "+"/expand button
       CheckBoxPage.plusButton.click();
       // Click Notes, React, Angular, General, Excel File.doc
@@ -48,12 +48,15 @@ context("Elements Page", () => {
       CheckBoxPage.resultGeneral.should("have.text","general");
       CheckBoxPage.resultExcel.should("have.text","excelFile");
     })
-   
-
     // Create checkbox scenario 2:
+    it.only("scenario 2", () => {
     // Click expand button
+    CheckBoxPage.plusButton.click();
     // Click Office
+    CheckBoxPage.checkOffice.check({force: true});
     // Validate the checked checkboxes
+    CheckBoxPage.resultNotes.should("have.text","office");
+    })
   });
 
   context("Radio button scenarios", () => {
