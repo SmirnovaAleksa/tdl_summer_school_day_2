@@ -1,6 +1,8 @@
 import TextBoxPage from "../../pageObjects/textBoxPage";
 import CheckBoxPage from "../../pageObjects/checkBoxPage";
 import RadioButtonPage from "../../pageObjects/radioButtonPage";
+import WebTablesPage from "../../pageObjects/webTablesPage";
+import ButtonPage from "../../pageObjects/buttonPage";
 
 context("Elements Page", () => {
   context("Text box scenarios", () => {
@@ -70,7 +72,7 @@ context("Elements Page", () => {
       RadioButtonPage.visit();
     });
     // Scenario 1:
-    it.only("Secenario 1", ()=> {
+    it("Secenario 1", ()=> {
       // Click yesButton
       RadioButtonPage.yesButton.check({force: true});
       // validate the message
@@ -80,7 +82,7 @@ context("Elements Page", () => {
       // validate the message
       RadioButtonPage.result.should("have.text","Impressive");
       // noButton - validate that the button exists but is disabled
-      RadioButtonPage.noButton.should("be.visible");
+      RadioButtonPage.noButton.should("exist")
       RadioButtonPage.noButton.should("have.class","disabled");
     })
    
@@ -88,27 +90,70 @@ context("Elements Page", () => {
 
   context("Web tables scenarios", () => {
     // Create WebTables page object
+    beforeEach(() => {
+      WebTablesPage.visit();
+    });
     // Create scenario 1:
-    // Click add record button
-    // fill in the necessary information
-    // click submit button
-    // search for the user based on previously added information
-    // validate tha the user is visible
-
+    it("Secenario 1", ()=> {
+      // Click add record button
+      WebTablesPage.addButton.click();
+      // fill in the necessary information
+      WebTablesPage.firstName.type("Aleksandra");
+      WebTablesPage.lastName.type("Smirnova");
+      WebTablesPage.email.type("smirnovaaleksa39@gmail.com");
+      WebTablesPage.age.type("23");
+      WebTablesPage.salary.type("1100");
+      WebTablesPage.department.type("TestDevLab Ventspils");
+      // click submit button
+      WebTablesPage.submitButton.click();
+      // search for the user based on previously added information
+      WebTablesPage.searchBox.type("Smirnova");
+      // validate tha the user is visible
+      WebTablesPage.firstRow.should("contain.text","Aleksandra");
+      WebTablesPage.firstRow.should("contain.text","Smirnova");
+      WebTablesPage.firstRow.should("contain.text","smirnovaaleksa39@gmail.com");
+      WebTablesPage.firstRow.should("contain.text","23");
+      WebTablesPage.firstRow.should("contain.text","1100");
+      WebTablesPage.firstRow.should("contain.text","TestDevLab Ventspils");
+    })
     // Create Scenario 2:
-    // Delete all table rows
-    // Validate that we see text - No rows found
+
+    it("Secenario 2", ()=> {
+      // Delete all table rows
+      //cy.get('[class = "rt-tr-group"]').first();
+      WebTablesPage.table.each(($el, index, $list) => {
+         if(index < 3){
+          cy.get(`#delete-record-${index + 1} > svg`).click();
+         }
+      })
+      //cy.get(".rt-tbody > :nth-child("+rows+") > .rt-tr > :nth-child("+rows+")");
+      // Validate that we see text - No rows found
+      WebTablesPage.noData.should("exist");
+
+    })
   });
 
   context("Buttons scenarios", () => {
-    // Create buttons clicking scenario
     // Create Buttons page
-    // Check documentation https://docs.cypress.io/api/commands/and for how to perform different types of clicking
-    // Click Double click button
-    // Validate the double click message
-    // Click rightclick button
-    // Validate the right click message
-    // Do dynamic click
-    // Validate dynamic click message
+    beforeEach(() => {
+      ButtonPage.visit();
+    });
+    // Create buttons clicking scenario
+    it.only("Button Scenario", () => {
+      // Check documentation https://docs.cypress.io/api/commands/and for how to perform different types of clicking
+      // Click Double click button
+      cy.get('#doubleClickBtn').dblclick();
+      // Validate the double click message
+      cy.get('#doubleClickMessage').should("have.text","You have done a double click");
+      // Click rightclick button
+      cy.get('#rightClickBtn').rightclick();
+      // Validate the right click message
+      cy.get('#rightClickMessage').should("have.text","You have done a right click");
+      // Do dynamic click
+      cy.get(':button').not('[id="doubleClickBtn"]').not('[id="rightClickBtn"]').should("have.text","Click Me").click();
+      // Validate dynamic click message
+      cy.get('#dynamicClickMessage').should("have.text","You have done a dynamic click");
+    })
+   
   });
 });
