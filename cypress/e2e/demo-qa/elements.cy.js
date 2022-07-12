@@ -142,17 +142,17 @@ context("Elements Page", () => {
     it.only("Button Scenario", () => {
       // Check documentation https://docs.cypress.io/api/commands/and for how to perform different types of clicking
       // Click Double click button
-      cy.get('#doubleClickBtn').dblclick();
+      ButtonPage.doubleButton.dblclick();
       // Validate the double click message
-      cy.get('#doubleClickMessage').should("have.text","You have done a double click");
+      ButtonPage.doubleMessage.should("have.text","You have done a double click");
       // Click rightclick button
-      cy.get('#rightClickBtn').rightclick();
+      ButtonPage.rightButton.rightclick();
       // Validate the right click message
-      cy.get('#rightClickMessage').should("have.text","You have done a right click");
+      ButtonPage.rightMessage.should("have.text","You have done a right click");
       // Do dynamic click
-      cy.get(':button').not('[id="doubleClickBtn"]').not('[id="rightClickBtn"]').should("have.text","Click Me").click();
+      ButtonPage.dynamicButton.click();
       // Validate dynamic click message
-      cy.get('#dynamicClickMessage').should("have.text","You have done a dynamic click");
+      ButtonPage.dynamicMessage.should("have.text","You have done a dynamic click");
     })
    
   });
