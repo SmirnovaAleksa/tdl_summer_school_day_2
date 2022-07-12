@@ -28,7 +28,7 @@ context("Widgets", () => {
 
         it.only("scenario 1",()=>{
             ProgressBarPage.startStopButton.click();
-            cy.wait(ProgressBarPage.progressBar).should("have.text","25%");
+            ProgressBarPage.progressBar.should("contain.text","25");
             ProgressBarPage.startStopButton.click();
         })
     });
