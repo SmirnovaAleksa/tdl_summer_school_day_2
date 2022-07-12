@@ -42,11 +42,11 @@ context("Elements Page", () => {
       CheckBoxPage.checkGeneral.click();
       CheckBoxPage.checkExcel.click();
       // Validate the clicked checkboxes
-      CheckBoxPage.resultNotes.should("have.text","notes");
-      CheckBoxPage.resultReact.should("have.text","react");
-      CheckBoxPage.resultAngular.should("have.text","angular");
-      CheckBoxPage.resultGeneral.should("have.text","general");
-      CheckBoxPage.resultExcel.should("have.text","excelFile");
+      CheckBoxPage.resultCol1.should("have.text","notes");
+      CheckBoxPage.resultCol2.should("have.text","react");
+      CheckBoxPage.resultCol3.should("have.text","angular");
+      CheckBoxPage.resultCol4.should("have.text","general");
+      CheckBoxPage.resultCol5.should("have.text","excelFile");
     })
     // Create checkbox scenario 2:
     it.only("scenario 2", () => {
@@ -55,7 +55,11 @@ context("Elements Page", () => {
     // Click Office
     CheckBoxPage.checkOffice.check({force: true});
     // Validate the checked checkboxes
-    CheckBoxPage.resultNotes.should("have.text","office");
+    CheckBoxPage.resultCol1.should("have.text","office");
+    CheckBoxPage.resultCol2.should("have.text","public");
+    CheckBoxPage.resultCol3.should("have.text","private");
+    CheckBoxPage.resultCol4.should("have.text","classified");
+    CheckBoxPage.resultCol5.should("have.text","general");
     })
   });
 
