@@ -1,4 +1,5 @@
 import TextBoxPage from "../../pageObjects/textBoxPage";
+import CheckBoxPage from "../../pageObjects/checkBoxPage";
 
 context("Elements Page", () => {
   context("Text box scenarios", () => {
@@ -11,12 +12,29 @@ context("Elements Page", () => {
     // validate the paragraphs
     it("Filling in Text Boxes", () => {
       // add the necessary steps
+      TextBoxPage.userName.type("Aleksandra");
+      TextBoxPage.userEmail.type("smirnovaaleksa39@gmail.com");
+      TextBoxPage.currentAddress.type("Jūras iela 47");
+      TextBoxPage.permanentrAddress.type("Sigūldas iela 35");
+      TextBoxPage.submitButton.click();
+
+      TextBoxPage.name.should("contain.text","Aleksandra");
+      TextBoxPage.email.should("contain.text","smirnovaaleksa39@gmail.com");
+      TextBoxPage.borderCurrentAddress.should("contain.text","Jūras iela 47");
+      TextBoxPage.borderPermanentrAddress.should("contain.text","Sigūldas iela 35");
     });
   });
 
   context("Check box scenarios", () => {
     // Create CheckBoxPage page object
+    beforeEach(() => {
+      CheckBoxPage.visit();
+    });
+    //cy.get(':nth-child(1) > .element-list > .menu-list > #item-1')
     // Create checkbox scenario 1:
+    it("scenario 1", () => {
+      cy.get('.rct-option-expand-all > .rct-icon > path');
+    })
     // Click the "+"/expand button
     // Click Notes, React, Angular, General, Excel File.doc
     // Validate the clicked checkboxes
