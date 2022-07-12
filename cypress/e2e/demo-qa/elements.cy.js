@@ -32,12 +32,23 @@ context("Elements Page", () => {
     });
     //cy.get(':nth-child(1) > .element-list > .menu-list > #item-1')
     // Create checkbox scenario 1:
-    it("scenario 1", () => {
-      cy.get('.rct-option-expand-all > .rct-icon > path');
+    it.only("scenario 1", () => {
+      // Click the "+"/expand button
+      CheckBoxPage.plusButton.click();
+      // Click Notes, React, Angular, General, Excel File.doc
+      CheckBoxPage.checkNotes.click();
+      CheckBoxPage.checkReact.click();
+      CheckBoxPage.checkAngular.click();
+      CheckBoxPage.checkGeneral.click();
+      CheckBoxPage.checkExcel.click();
+      // Validate the clicked checkboxes
+      CheckBoxPage.resultNotes.should("have.text","notes");
+      CheckBoxPage.resultReact.should("have.text","react");
+      CheckBoxPage.resultAngular.should("have.text","angular");
+      CheckBoxPage.resultGeneral.should("have.text","general");
+      CheckBoxPage.resultExcel.should("have.text","excelFile");
     })
-    // Click the "+"/expand button
-    // Click Notes, React, Angular, General, Excel File.doc
-    // Validate the clicked checkboxes
+   
 
     // Create checkbox scenario 2:
     // Click expand button
