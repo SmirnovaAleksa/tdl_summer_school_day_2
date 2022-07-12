@@ -25,20 +25,8 @@ class CheckBoxPage extends BasePage {
     static get checkOffice(){
         return cy.get('[id = "tree-node-office"]');
     }
-    static get resultCol1(){
-        return cy.get('#result > :nth-child(2)');
-    }
-    static get resultCol2(){
-        return cy.get('#result > :nth-child(3)');
-    }
-    static get resultCol3(){
-        return cy.get('#result > :nth-child(4)');
-    }
-    static get resultCol4(){
-        return cy.get('#result > :nth-child(5)');
-    }
-    static get resultCol5(){
-        return cy.get('#result > :nth-child(6)');
+    static get result(){
+        return cy.get('#result');
     }
 }
 

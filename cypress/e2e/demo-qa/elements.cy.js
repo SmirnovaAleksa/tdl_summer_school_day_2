@@ -1,5 +1,6 @@
 import TextBoxPage from "../../pageObjects/textBoxPage";
 import CheckBoxPage from "../../pageObjects/checkBoxPage";
+import RadioButtonPage from "../../pageObjects/radioButtonPage";
 
 context("Elements Page", () => {
   context("Text box scenarios", () => {
@@ -42,35 +43,47 @@ context("Elements Page", () => {
       CheckBoxPage.checkGeneral.click();
       CheckBoxPage.checkExcel.click();
       // Validate the clicked checkboxes
-      CheckBoxPage.resultCol1.should("have.text","notes");
-      CheckBoxPage.resultCol2.should("have.text","react");
-      CheckBoxPage.resultCol3.should("have.text","angular");
-      CheckBoxPage.resultCol4.should("have.text","general");
-      CheckBoxPage.resultCol5.should("have.text","excelFile");
+      CheckBoxPage.result.should("contains.text","notes");
+      CheckBoxPage.result.should("contains.text","react");
+      CheckBoxPage.result.should("contains.text","angular");
+      CheckBoxPage.result.should("contains.text","general");
+      CheckBoxPage.result.should("contains.text","excelFile");
     })
     // Create checkbox scenario 2:
-    it.only("scenario 2", () => {
+    it("scenario 2", () => {
     // Click expand button
     CheckBoxPage.plusButton.click();
     // Click Office
     CheckBoxPage.checkOffice.check({force: true});
     // Validate the checked checkboxes
-    CheckBoxPage.resultCol1.should("have.text","office");
-    CheckBoxPage.resultCol2.should("have.text","public");
-    CheckBoxPage.resultCol3.should("have.text","private");
-    CheckBoxPage.resultCol4.should("have.text","classified");
-    CheckBoxPage.resultCol5.should("have.text","general");
+    CheckBoxPage.result.should("contains.text","office");
+    CheckBoxPage.result.should("contains.text","public");
+    CheckBoxPage.result.should("contains.text","private");
+    CheckBoxPage.result.should("contains.text","classified");
+    CheckBoxPage.result.should("contains.text","general");
     })
   });
 
   context("Radio button scenarios", () => {
     // Create RadioButtons page object
+    beforeEach(() => {
+      RadioButtonPage.visit();
+    });
     // Scenario 1:
-    // Click yesButton
-    // validate the message
-    // click impressiveButton
-    // validate the message
-    // noButton - validate that the button exists but is disabled
+    it.only("Secenario 1", ()=> {
+      // Click yesButton
+      RadioButtonPage.yesButton.check({force: true});
+      // validate the message
+      RadioButtonPage.result.should("have.text","Yes");
+      // click impressiveButton
+      RadioButtonPage.impressiveButton.check({force: true});
+      // validate the message
+      RadioButtonPage.result.should("have.text","Impressive");
+      // noButton - validate that the button exists but is disabled
+      RadioButtonPage.noButton.should("be.visible");
+      RadioButtonPage.noButton.should("have.class","disabled");
+    })
+   
   });
 
   context("Web tables scenarios", () => {
