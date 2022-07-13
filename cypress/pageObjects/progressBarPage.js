@@ -8,7 +8,7 @@ class ProgressBarPage extends BasePage {
     return cy.get('#startStopButton');
   }
   static get progressBar() {
-    return cy.get('.progress-bar');
+    return cy.get('.progress-bar',{ timeout: 10000 });
   }
 
 }

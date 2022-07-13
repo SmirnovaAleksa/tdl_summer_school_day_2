@@ -30,6 +30,17 @@ context("Widgets", () => {
             ProgressBarPage.startStopButton.click();
             ProgressBarPage.progressBar.should("contain.text","25");
             ProgressBarPage.startStopButton.click();
+            ProgressBarPage.progressBar.should("contain.text","25");
+
+            ProgressBarPage.startStopButton.click();
+            ProgressBarPage.progressBar.should("contain.text","75");
+            ProgressBarPage.startStopButton.click();
+            ProgressBarPage.progressBar.should("contain.text","75");
+            
+            ProgressBarPage.startStopButton.click();
+            ProgressBarPage.progressBar.should("contain.text","99");
+            ProgressBarPage.startStopButton.click();
+            ProgressBarPage.progressBar.should("contain.text","99");
         })
     });
 
